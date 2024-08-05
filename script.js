@@ -19,6 +19,10 @@ function calculator(a,operator,b){
         case "-":
             return a-b;
         case "/":
+            if(a === 0 || b === 0){
+                alert("Can't divide by zero");
+                break;
+            }
             return a/b;
         case "*":
             return a*b;
@@ -81,6 +85,9 @@ function addToString(inputKey){
         case "multi":
             inputString.innerText += "*";
             break;
+        case "decimal":
+            inputString.innerText += ".";
+            break;
         default:
             break;
     }
@@ -94,19 +101,31 @@ function pickCalcString(stringToResolve){
     let tempStringA = "";
     let tempStringB = "";
     let tempOperator = "";
+    let foundDecimal = false;
 
     for(let i = 0; i<toResolve.length; i++){
+        if(i > 0 && toResolve[i] === "." && !foundDecimal){
+            foundDecimal = true;
+            tempStringA += toResolve[i];
+            continue;
+        }
         let numbfy = Number(toResolve[i]);
-        if(isNaN(numbfy)){
+        if(isNaN(numbfy) && toResolve[i] !== "."){
             tempOperator = String(toResolve[i]);
             break;
         }
-        tempStringA += String(toResolve[i]);
+        
+        tempStringA += toResolve[i];
     }
-    
+
     let tempOperatorIndex = toResolve.indexOf(tempOperator);
 
     for(let i = tempOperatorIndex+1; i<toResolve.length; i++){
+        if(i-1 !== toResolve[tempOperatorIndex] && toResolve[i] === "." && !foundDecimal){
+            foundDecimal = true;
+            tempStringA += toResolve[i];
+            continue;
+        }
         tempStringB += String(toResolve[i]);
     }
 
@@ -115,7 +134,7 @@ function pickCalcString(stringToResolve){
     operatorSelector = tempOperator;
 
     let result = calculator(numberA,operatorSelector,numberB);
-    return result;
+    return Number.isInteger(result) ? result : result.toFixed(2);
     
 }
 
@@ -150,6 +169,9 @@ document.querySelector("#eight").addEventListener("mousedown", () => {
 document.querySelector("#nine").addEventListener("mousedown", () => {
     addToString("nine");
 });
+document.querySelector("#decimal").addEventListener("mousedown", () => {
+    addToString("decimal");
+})
 document.querySelector("#sum").addEventListener("mousedown", () => {
     addOperatorToCalculator("sum");
 })
@@ -187,7 +209,10 @@ function addOperatorToCalculator(operator){
         hasOperator = true;
     }else{
         let calcResult = pickCalcString(inputString.innerText)
-        if(calcResult === undefined || calcResult === null) return;
+        if(calcResult === undefined || calcResult === null || isNaN(calcResult)){
+            alert("Calc Error!");
+            return;
+        } 
         inputString.innerText = calcResult;
         hasOperator = false;
     }

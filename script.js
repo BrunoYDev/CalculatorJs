@@ -102,6 +102,7 @@ function pickCalcString(stringToResolve){
     let tempStringB = "";
     let tempOperator = "";
     let foundDecimal = false;
+    
 
     for(let i = 0; i<toResolve.length; i++){
         if(i > 0 && toResolve[i] === "." && !foundDecimal){
@@ -123,7 +124,7 @@ function pickCalcString(stringToResolve){
     for(let i = tempOperatorIndex+1; i<toResolve.length; i++){
         if(i-1 !== toResolve[tempOperatorIndex] && toResolve[i] === "." && !foundDecimal){
             foundDecimal = true;
-            tempStringA += toResolve[i];
+            tempStringB += toResolve[i];
             continue;
         }
         tempStringB += String(toResolve[i]);

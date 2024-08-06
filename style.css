@@ -1,0 +1,99 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: bisque;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#container{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 30%;
+    height: 55%;
+    background-color: grey;
+    border-radius: 12px;
+}
+#calculatorHeader{
+    margin: 0;
+    padding: 0;
+    width: 99%;
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 12px;
+}
+#calculatorHeader > #inputString{
+    font-size: 30px;
+    margin-right: 15px;
+    color: white;
+    font-family: 'Roboto', Courier, monospace;
+}
+
+#keyboard{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#normalSizeKeys{
+    margin: 10px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    height: 80%;
+    gap: 0px;
+}
+
+#keyboard > #normalSizeKeys > .key{
+    width: 80px;
+    height: 80px;
+    background-color: aqua;
+    color: black;
+}
+
+#bigSizeKeys{
+    display: flex;
+    gap: 6px;
+    margin-right: 23px;
+    padding: 0;
+    width: 55%;
+}
+
+#keyboard > #bigSizeKeys > .key{
+    width: 155px;
+    height: 50px;
+    background-color: blue;
+    color: white;
+}
+
+.key{
+    font-weight: bolder;
+    font-size: 30px;
+    outline: none;
+    border: 1px solid black;
+    font-family: 'Roboto', Courier, monospace;
+    border-radius: 12px;
+}
+
+.key:active{
+    opacity: 30%;
+}
+
+.key:hover{
+    cursor: pointer;
+}
